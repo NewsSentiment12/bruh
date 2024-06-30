@@ -2,20 +2,17 @@ import requests
 from newspaper import Article
 import feedparser
 import pandas as pd
+import json
 
 def get_news_links(query, num_results=5):
-    query = query.replace(" ", "%20")  # URL-encode spaces
+    query = query.replace(" ", "%20")
     rss_url = f"https://news.google.com/rss/search?q={query}"
     feed = feedparser.parse(rss_url)
 
     if not feed.entries:
-        print("Failed to retrieve RSS feed or no entries found.")
         return []
 
-    links = []
-    for entry in feed.entries[:num_results]:
-        links.append(entry.link)
-    
+    links = [entry.link for entry in feed.entries[:num_results]]
     return links
 
 def get_article_details(url):
@@ -25,7 +22,6 @@ def get_article_details(url):
     response = requests.get(url, headers=headers)
     
     if response.status_code != 200:
-        print(f"Failed to retrieve article. Status code: {response.status_code}")
         return None
     
     article = Article(url)
@@ -44,25 +40,22 @@ def get_article_details(url):
         'url': url
     }
 
-def main():
-    query = input("Enter the keyword(s) for news search: ")
-    num_results = int(input("Enter the number of results you want: "))
-    
+def fetch_articles(query, num_results=5):
     links = get_news_links(query, num_results)
     if not links:
-        print("No articles found.")
-        return
-    
+        return []
+
     articles_data = []
-    for idx, link in enumerate(links):
-        print(f"Fetching article {idx + 1}/{len(links)}: {link}")
+    for link in links:
         details = get_article_details(link)
         if details:
             articles_data.append(details)
     
-    # Create a DataFrame
-    df = pd.DataFrame(articles_data)
-    print(df)
+    return articles_data
 
 if __name__ == "__main__":
-    main()
+    query = input("Enter the keyword(s) for news search: ")
+    num_results = int(input("Enter the number of results you want: "))
+    
+    articles = fetch_articles(query, num_results)
+    print(json.dumps(articles, indent=2))
