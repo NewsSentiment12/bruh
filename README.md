@@ -16,8 +16,7 @@ Key Steps:
 3. Feature Engineering
 - AutoFE-based transformations, PCA, and interaction features.
 - Feature ranking via ANOVA F-test + RFE.
-
-Final: 282 optimized features.
+- Final: 282 optimized features.
 
 4. Class Imbalance Handling
 - Tested SMOTE, ADASYN, Tomek Links, NearMiss, and no sampling.
@@ -25,11 +24,8 @@ Final: 282 optimized features.
 
 5. Modeling
 
-Models trained: XGBoost, CatBoost, LightGBM, Logistic Regression, Random Forest, SVM, Decision Trees.
-
-Best model:
-Voting Classifier (Grid Search) + Logit Shift
-
-Performance:
-ROC-AUC: 0.7832
-Recall: 0.23
+- Models trained: XGBoost, CatBoost, LightGBM, Logistic Regression, Random Forest, SVM, Decision Trees.
+- Best model: Voting Classifier
+- Performance:
+ - ROC-AUC: 0.7832
+ - Recall: 0.23
