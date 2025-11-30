@@ -2,7 +2,7 @@ CREDIT CARD DEFAULT PREDICTION AND BEHAVIOUR SCORING USING MACHINE LEARNING
 
 Overview:
 This project focuses on developing a high-performance machine learning system to identify high-risk customers by analyzing financial, transactional, and credit-bureau data. It includes thorough data exploration, advanced missing-value imputation, engineered feature creation, imbalance handling, and the evaluation of multiple models—ultimately delivering an optimized ensemble classifier capable of reliably detecting potential defaults or non-compliance cases.
-
+ 
 Key Steps:
 
 1. Data Understanding & EDA
